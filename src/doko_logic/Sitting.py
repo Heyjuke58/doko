@@ -451,7 +451,7 @@ class Sitting:
                 contra_announcement = new_announcement if new_announcement > contra_announcement else contra_announcement
 
         # determine the team who won the game also regarding announcements
-        winning_team = 0 if re_announcement < re_card_points or contra_announcement > contra_card_points else 1
+        winning_team = 0 if re_announcement < re_card_points and contra_announcement > contra_card_points else 1
 
         win_card_points = re_card_points if winning_team == 0 else contra_card_points
 
@@ -475,16 +475,16 @@ class Sitting:
         # Winning party has more than 120 and loosing party made wrong announcements
         for i in range(150, 241, 30):
             if win_card_points > 240 - i and loose_announcement > i:
-                points += 1
+                points += 2
 
         if self.rules.announcement_doubles_also_extra_points:
             points = add_extra_points(points)
 
         # get either 2 points for announcing the win or double points depending on the rules
-        if win_announcement > 120 and win_card_points > 120:
+        if win_announcement > 120:
             points = points * 2 if self.rules.announcement_doubles else points + 2
 
-        if loose_announcement > 120 and win_card_points > 120:
+        if loose_announcement > 120:
             points = points * 2 if self.rules.announcement_doubles else points + 2
 
         if not self.rules.announcement_doubles_also_extra_points:
