@@ -1,0 +1,6 @@
+numpy
+aioconsole
+rich
+Django
+psycopg2-binary
+pytest
