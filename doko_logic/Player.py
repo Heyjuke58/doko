@@ -1,9 +1,10 @@
 from functools import reduce
 
-from Card import Card
-from GameModes import GameModus, Regular
 from rich.console import Console
-from Trick import Trick
+
+from .Card import Card
+from .GameModes import GameModus, Regular
+from .Trick import Trick
 
 
 class Player:

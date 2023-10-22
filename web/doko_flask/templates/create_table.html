@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title%}Doko - Create a table{% endblock %}
+
+{% block content%}
+<form method="POST">
+    <h2 align="center">Create a table</h3>
+        <div class="form-group">
+            <div class="container">
+                <label for="table_name">Table name (optional)</label>
+                <input type="text" class="form-control" id="table_name" name="table_name"
+                    placeholder="Enter a name for the table (optional)">
+                <br />
+                <label for="password">Password (optional)</label>
+                <input type="password" class="form-control" id="password" name="password"
+                    placeholder="Enter a password for the table (optional)">
+                <br />
+            </div>
+            <div class="container">
+                <h3>Rules</h3>
+
+
+                <div class="container">
+                    <h4>Nines</h4>
+                    <input type="checkbox" class="form-check-input" value="" id="nines" name="nines">
+                    <label for="nines">Play with nines</label>
+                </div>
+
+                <div class="container">
+                    <h4>Dulle</h4>
+                    <input type="checkbox" class="form-check-input" value="" id="dulle_1st_high" name="dulle_1st_high"
+                        checked>
+                    <label for="dulle_1st_high">First dulle is high (uncheck to make second dulle high)</label>
+                    <br>
+                    <div id="dulle_2nd_high_but_not_in_last_trick_container"
+                        name="dulle_2nd_high_but_not_in_last_trick_container" class="tab" hidden>
+                        <input type="checkbox" class="form-check-input" value=""
+                            id="dulle_2nd_high_but_not_in_last_trick" name="dulle_2nd_high_but_not_in_last_trick"
+                            disabled>
+                        <label class="form-check-label" for="dulle_2nd_high_but_not_in_last_trick">But not in the last
+                            trick.</label>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <h4>Piggies</h4>
+                    <input type="checkbox" class="form-check-input" value="" id="piggies" name="piggies" checked>
+                    <label for="piggies">Piggies</label>
+                    <br>
+                    <div id="piggies_auto_announce_container" name="piggies_auto_announce_container" class="tab">
+                        <input type="checkbox" class="form-check-input" value="" id="piggies_auto_announce"
+                            name="piggies_auto_announce">
+                        <label class="form-check-label" for="piggies_auto_announce">Auto announce when piggies are
+                            played.</label>
+                    </div>
+                </div>
+
+                <br />
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Create table</button>
+        </div>
+</form>
+{% endblock %}
+{% block scripts %}
+<style type="text/css">
+    .tab {
+        margin-left: 40px;
+    }
+</style>
+<script>
+    var checkbox_dulle = document.querySelector("input[name=dulle_1st_high]");
+    var checkbox_dulle_last_trick = document.querySelector("input[name=dulle_2nd_high_but_not_in_last_trick]");
+    var dulle_last_trick_container = document.querySelector("div[name=dulle_2nd_high_but_not_in_last_trick_container]");
+
+    checkbox_dulle.addEventListener('change', function () {
+        if (this.checked) {
+            checkbox_dulle_last_trick.checked = false;
+            checkbox_dulle_last_trick.disabled = true;
+            dulle_last_trick_container.setAttribute("hidden", "hidden");
+        } else {
+            checkbox_dulle_last_trick.disabled = false
+            dulle_last_trick_container.removeAttribute("hidden");
+        }
+    });
+
+    var checkbox_piggies = document.querySelector("input[name=piggies]");
+    var checkbox_piggies_auto_announce = document.querySelector("input[name=piggies_auto_announce]");
+    var piggies_auto_announce_container = document.querySelector("div[name=piggies_auto_announce_container]");
+
+    checkbox_piggies.addEventListener('change', function () {
+        if (this.checked) {
+            checkbox_piggies_auto_announce.disabled = false;
+            piggies_auto_announce_container.removeAttribute("hidden");
+        } else {
+            checkbox_piggies_auto_announce.checked = false;
+            checkbox_piggies_auto_announce.disabled = true;
+            piggies_auto_announce_container.setAttribute("hidden", "hidden");
+        }
+    });
+</script>
+{% endblock %}

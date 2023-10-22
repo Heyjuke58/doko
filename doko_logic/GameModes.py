@@ -1,6 +1,6 @@
 import abc
 
-from Card import Card
+from .Card import Card
 
 REGULAR_TRUMP_ORDER = [
     Card(color=2, symbol=1),  # Dulle

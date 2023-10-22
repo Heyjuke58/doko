@@ -1,19 +1,6 @@
-import inspect
-import os
-import sys
+from doko_logic import Card, Regular, Reservation, Rules, Trick
 
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-sys.path.insert(0, parentdir)
-
-
-from Card import Card
-from ExtraPoint import ExtraPoint
-from GameModes import ColorSoloDiamondsReplacedWithPiggies, Piggies, Regular, SilentWedding, Solo, Wedding
-from Reservation import Reservation
-from Rules import Rules
-from tests.standard_setup import all_fine_hands, standard_test_setup, standard_test_setup_all_fine, wedding_hands
-from Trick import Trick
+from .standard_setup import all_fine_hands, standard_test_setup, standard_test_setup_all_fine, wedding_hands
 
 
 def test_fox_teams_clear():

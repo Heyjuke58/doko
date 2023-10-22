@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Optional, Tuple, Union
 
-from Card import Card
-from GameModes import ColorSoloDiamondsReplaced, GameModus
-from Trick import Trick
+from .Card import Card
+from .GameModes import ColorSoloDiamondsReplaced, GameModus
+from .Trick import Trick
 
 PayingPlayer = Optional[Union[int, list[int]]]
 

@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+
+  nginx:
+    container_name: nginx
+    build: ./nginx-html
+    volumes:
+      - ./nginx-html:/usr/share/nginx/html
+      - static_volume:/home/app/web/doko_flask/static
+    ports:
+      - 8080:80
+    depends_on:
+      - web
+
+  web:
+    container_name: flask
+    build: ./web
+    restart: always
+    command: python -m debugpy --listen 0.0.0.0:5679 manage.py run -h 0.0.0.0
+    # command: python manage.py run -h 0.0.0.0
+    volumes:
+      - ./web/:/usr/src/app
+      - static_volume:/home/app/web/doko_flask/static
+    ports:
+      - 5000:5000
+      - 5679:5679
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+
+  db:
+    container_name: postgres
+    image: postgres:16
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=hauke
+      - POSTGRES_PASSWORD=YI6rSSo5eGKMHy8do2kf
+      - POSTGRES_DB=doko_dev
+      - PGDATA=/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+      - PGADMIN_CONFIG_SERVER_MODE=False
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+    ports:
+      - 5050:80
+
+volumes:
+  postgres_data:
+  static_volume:
+  pgadmin_data:

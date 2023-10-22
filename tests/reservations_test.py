@@ -1,17 +1,5 @@
-import inspect
-import os
-import sys
+from doko_logic import Card, ColorSoloDiamondsReplacedWithPiggies, Piggies, Regular, Reservation, SilentWedding, Solo, Wedding
 
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-sys.path.insert(0, parentdir)
-
-from io import StringIO
-from unittest.mock import patch
-
-from Card import Card
-from GameModes import ColorSoloDiamondsReplacedWithPiggies, Piggies, Regular, SilentWedding, Solo, Wedding
-from Reservation import Reservation
 from tests.standard_setup import all_fine_hands, standard_test_setup, wedding_hands
 
 piggies_hands: list[list[Card]] = [

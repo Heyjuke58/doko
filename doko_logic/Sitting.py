@@ -7,10 +7,11 @@ from typing import Callable, Optional, Tuple, Union
 
 import numpy as np
 from aioconsole import ainput
-from Announcement import ANNOUCEMENT_STAGES, Announcement
-from Card import Card
-from Deck import Deck
-from ExtraPoint import (
+
+from .Announcement import ANNOUCEMENT_STAGES, Announcement
+from .Card import Card
+from .Deck import Deck
+from .ExtraPoint import (
     ExtraPoint,
     ExtraPointCheck,
     check_extra_point_doppelkopf,
@@ -25,7 +26,7 @@ from ExtraPoint import (
     check_extra_point_karlchen_save,
     check_extra_point_karlchen_save_denied,
 )
-from GameModes import (
+from .GameModes import (
     NON_SOLO_GAME_MODES,
     SILENT_WEDDING_GAME_MODES,
     ColorSoloDiamondsReplaced,
@@ -47,10 +48,10 @@ from GameModes import (
     Wedding,
     WeddingWithPiggies,
 )
-from Player import Player
-from Reservation import RESERVATION_VALUES, SOLO_VALUES, Reservation
-from Rules import EXTRA_POINTS, Rules
-from Trick import Trick
+from .Player import Player
+from .Reservation import RESERVATION_VALUES, SOLO_VALUES, Reservation
+from .Rules import EXTRA_POINTS, Rules
+from .Trick import Trick
 
 # Terminology
 # Sitting: Overarching gathering of players to play n rounds of doppelkopf
@@ -101,7 +102,7 @@ class Sitting:
                 game_modus, teams, re_deal = self.evaluate_reservations(reservations)
                 self.teams = teams
                 for i in range(4):
-                    self.players[self.player_to_come_out + i % 4].set_team(self.teams[i])
+                    self.players[(self.player_to_come_out + i) % 4].set_team(self.teams[i])
 
             for player in self.players:
                 player.final_hand_sort(game_modus, game_nr)
@@ -221,6 +222,7 @@ class Sitting:
             if reservation.is_solo():
                 game_modus = reservation.get_solo(self.players, self.rules)
                 teams = [0 if i == reservation.player else 1 for i in range(4)]
+                self.set_teams(teams)
                 return game_modus, teams, re_deal
 
         # throw
@@ -233,6 +235,7 @@ class Sitting:
         for reservation in reservations:
             if reservation.is_poverty():
                 game_modus, teams, re_deal = asyncio.run(self.evaluate_poverty(reservation.player))
+                self.set_teams(teams)
                 return game_modus, teams, re_deal
 
         # wedding/silent wedding
@@ -240,14 +243,16 @@ class Sitting:
             if reservation.is_wedding():
                 game_modus = Wedding() if not check_piggies(reservations) else WeddingWithPiggies()
                 teams = [0 if i == reservation.player else 2 for i in range(4)]
+                self.set_teams(teams)
                 return game_modus, teams, re_deal
             if reservation.is_silent_wedding():
                 game_modus = SilentWedding() if not check_piggies(reservations) else SilentWeddingWithPiggies()
                 teams = [0 if i == reservation.player else 1 for i in range(4)]
+                self.set_teams(teams)
                 return game_modus, teams, re_deal
 
         # regular teams
-        teams = [0 if self.players[self.player_to_come_out + i % 4].is_re() else 1 for i in range(4)]
+        teams = [0 if self.players[(self.player_to_come_out + i) % 4].is_re() else 1 for i in range(4)]
         # piggies
         if check_piggies(reservations):
             game_modus = Piggies()
@@ -451,7 +456,7 @@ class Sitting:
                 contra_announcement = new_announcement if new_announcement > contra_announcement else contra_announcement
 
         # determine the team who won the game also regarding announcements
-        winning_team = 0 if re_announcement < re_card_points and contra_announcement > contra_card_points else 1
+        winning_team = 0 if re_announcement <= re_card_points and contra_announcement > contra_card_points else 1
 
         win_card_points = re_card_points if winning_team == 0 else contra_card_points
 
@@ -467,9 +472,9 @@ class Sitting:
 
         # Standard case (winning party has more than 120 points) but starting at 150 points, since contra can also win with 120 points
         for i in range(150, 241, 30):
-            if win_card_points > i:
+            if win_card_points > i or win_card_points == 240:
                 points += 1
-                if win_announcement > i:
+                if win_announcement > i or win_announcement == 240 == win_card_points:
                     points += 1
 
         # Winning party has more than 120 and loosing party made wrong announcements
@@ -511,7 +516,7 @@ class Sitting:
         # TODO: points are stored redundant in sitting and player, decide which way to go later
         if isinstance(game_modus, Solo):
             for i in range(4):
-                player = self.players[self.player_to_come_out + i % 4]
+                player = self.players[(self.player_to_come_out + i) % 4]
                 if winning_team == player.team:
                     player.add_points(points * 3)
                     self.points[player.nr] += points * 3
@@ -520,7 +525,7 @@ class Sitting:
                     self.points[player.nr] -= points
         else:
             for i in range(4):
-                player = self.players[self.player_to_come_out + i % 4]
+                player = self.players[(self.player_to_come_out + i) % 4]
                 if winning_team == player.team:
                     player.add_points(points)
                     self.points[player.nr] += points

@@ -1,8 +1,4 @@
-from Card import Card
-from GameModes import GameModus, Regular
-from Reservation import Reservation
-from Sitting import Sitting
-from Trick import Trick
+from doko_logic import Card, GameModus, Regular, Reservation, Sitting, Trick
 
 all_fine_hands: list[list[Card]] = [
     [Card(0, 0), Card(0, 0), Card(0, 1), Card(0, 1), Card(0, 2), Card(0, 2), Card(1, 3), Card(0, 3), Card(0, 4), Card(0, 4)],

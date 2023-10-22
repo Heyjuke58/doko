@@ -1,7 +1,7 @@
-from Card import Card, COLORS, SYMBOLS
+from .Card import COLORS, SYMBOLS, Card
 
-class Deck():
 
+class Deck:
     def __init__(self, nines: bool) -> None:
         self.cards = []
         if nines:

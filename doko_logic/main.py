@@ -1,6 +1,6 @@
 import argparse
 
-from Sitting import Sitting
+from .Sitting import Sitting
 
 if __name__ == "__main__":
     cmdline_parser = argparse.ArgumentParser("doko")

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Annotated, Optional
 
-from Card import Card
+from .Card import Card
 
 
 @dataclass

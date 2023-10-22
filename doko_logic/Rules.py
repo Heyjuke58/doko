@@ -1,7 +1,7 @@
 from typing import Tuple
 
-from ExtraPoint import ExtraPoint
-from GameModes import (
+from .ExtraPoint import ExtraPoint
+from .GameModes import (
     COLOR_SOLO_DIAMONDS_REPLACED_GAME_MODES,
     NON_SOLO_GAME_MODES,
     SILENT_WEDDING_GAME_MODES,
@@ -69,6 +69,7 @@ class Rules:
         fox_caught_in_solos: bool = True,  # Trump or Diamonds replaced
         fox_last_trick: bool = False,
         doppelkopf: bool = True,
+        dulle_caught: bool = False,  # TODO: reflect in game logic
         dulle_caught_dulle: bool = False,
         karlchen: bool = True,
         karlchen_caught_any_card: bool = False,  # False: must be queen of diamonds
@@ -93,7 +94,6 @@ class Rules:
         both_announce_bock: bool = True,
         jacks_pile_bock: bool = True,  # makes current game a bock game
     ) -> None:
-
         ## DULLE ##
         assert not (
             dulle_1st_high and dulle_2nd_high_but_not_in_last_trick
@@ -128,6 +128,8 @@ class Rules:
         self.fox_caught_in_solos = fox_caught_in_solos
         self.fox_last_trick = fox_last_trick
         self.doppelkopf = doppelkopf
+        assert not (dulle_caught and not dulle_caught_dulle), "When dulle can be caught it must also be able to be caught by a dulle."
+        self.dulle_caught = dulle_caught
         self.dulle_caught_dulle = dulle_caught_dulle
         self.karlchen = karlchen
         assert not (not karlchen and (karlchen_caught_any_card or karlchen_caught_plus)), "Cannot catch karlchen if it does not exist."
