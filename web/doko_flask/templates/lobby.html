@@ -3,16 +3,30 @@
 
 {% block content%}
 <div class="non-game-body lobby-body">
-    <div class="container align-center">
+    <div class="container align-center" id="top-row">
         <a class="btn btn-primary" href="/create-table">Create Table</a>
     </div>
     <div class="container table-container">
-        {% for table in tables %}
-        <div>
-            <label>{{table.name}}</label>
+        <div class="align-center table-label">
+            {% if data_to_show %}
+            <label class="align-center">Tables</label>
+            {% else %}
+            <label class="align-center">There are currently no open tables.<br>Why don't you open
+                one?</label>
+            {% endif %}
+        </div>
+
+        {% for table in data_to_show %}
+        <div class="table-entry">
+            <label class="wrap-center">{{table.name}}</label>
             <button type="button" class="btn btn-primary">Join</button>
         </div>
         {% endfor %}
+
+        {% import "_macros.html" as macros %}
+
+        {{ macros.render_pagination(pagination, 'lobby_view.lobby') }}
+
     </div>
 </div>
 {% endblock %}

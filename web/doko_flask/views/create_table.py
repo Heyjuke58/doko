@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from werkzeug.security import generate_password_hash
 
@@ -81,5 +81,7 @@ def create_table():
         )
         db.session.add(new_table)
         db.session.commit()
+
+        return redirect(url_for("lobby_view.lobby"))
 
     return render_template("create_table.html", user=current_user)

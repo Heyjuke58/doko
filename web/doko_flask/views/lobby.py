@@ -11,4 +11,18 @@ lobby_view = Blueprint("lobby_view", __name__)
 @login_required
 def lobby():
     tables = Table.query.all()
-    return render_template("lobby.html", user=current_user, tables=tables)
+    page = int(request.args.get("page", 1))
+
+    pagination = db.paginate(
+        db.select(Table).order_by(Table.date_created),
+        max_per_page=8,
+        page=page,
+        per_page=8,
+    )
+    return render_template(
+        "lobby.html",
+        user=current_user,
+        # tables=tables,
+        pagination=pagination,
+        data_to_show=pagination.items,
+    )
