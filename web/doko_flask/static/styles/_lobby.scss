@@ -1,0 +1,25 @@
+@import './colors';
+
+.table-entry {
+    padding: 5px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    row-gap: 5px;
+    border-bottom: 2px solid $primary;
+}
+
+.table-label {
+    border-bottom: 2px solid $primary;
+}
+
+#top-row {
+    border-bottom: 3px solid $primary;
+    padding-bottom: 5px;
+}
+
+.table-container {
+    margin-top: 3px;
+    // border-right: 2px solid $primary;
+    // border-left: 2px solid $primary;
+}

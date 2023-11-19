@@ -3,6 +3,36 @@
   font-family: "Poppins";
   src: url("Poppins-Regular.woff2");
 }
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  background-color: rgb(33, 37, 41);
+}
+
+.table-entry {
+  padding: 5px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  row-gap: 5px;
+  border-bottom: 2px solid rgb(117, 41, 36);
+}
+
+.table-label {
+  border-bottom: 2px solid rgb(117, 41, 36);
+}
+
+#top-row {
+  border-bottom: 3px solid rgb(117, 41, 36);
+  padding-bottom: 5px;
+}
+
+.table-container {
+  margin-top: 3px;
+}
+
 /*!
  * Bootstrap  v5.3.2 (https://getbootstrap.com/)
  * Copyright 2011-2023 The Bootstrap Authors
@@ -11980,6 +12010,24 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.nav-link {
+  color: rgb(45, 111, 92);
+  --bs-nav-link-padding-x: 0.7rem;
+}
+
+.nav-link:hover {
+  color: rgb(105, 194, 169);
+}
+
+.nav-link:active {
+  color: rgb(45, 111, 92);
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: rgb(45, 111, 92);
+}
+
 html,
 body {
   margin: 0;
@@ -12000,24 +12048,6 @@ h2.form-title, .form-title.h2 {
   border-bottom: 2px solid rgb(45, 111, 92);
   padding-bottom: 5px;
   font-weight: bold;
-}
-
-.nav-link {
-  color: rgb(45, 111, 92);
-  --bs-nav-link-padding-x: 0.7rem;
-}
-
-.nav-link:hover {
-  color: rgb(105, 194, 169);
-}
-
-.nav-link:active {
-  color: rgb(45, 111, 92);
-}
-
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-item.show .nav-link {
-  color: rgb(45, 111, 92);
 }
 
 .fade-container {
@@ -12162,14 +12192,6 @@ h2.form-title, .form-title.h2 {
   height: 2.5rem;
   width: 4.75rem;
   border-radius: 5rem;
-}
-
-#footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 80px;
-  background-color: rgb(33, 37, 41);
 }
 
 #content-wrap {

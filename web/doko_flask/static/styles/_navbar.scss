@@ -1,0 +1,19 @@
+@import './colors';
+
+.nav-link {
+    color: $secondary;
+    --bs-nav-link-padding-x: 0.7rem;
+}
+
+.nav-link:hover {
+    color: $secondary_light;
+}
+
+.nav-link:active {
+    color: $secondary;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: $secondary;
+}
