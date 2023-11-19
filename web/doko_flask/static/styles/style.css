@@ -11980,6 +11980,13 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 body {
   font-family: "Poppins";
   color: rgb(45, 111, 92);
@@ -12073,7 +12080,8 @@ h2.form-title, .form-title.h2 {
 }
 
 .create-table-body {
-  height: 590px;
+  height: 575px;
+  margin-bottom: 2rem;
 }
 
 .form-control {
@@ -12160,18 +12168,18 @@ h2.form-title, .form-title.h2 {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 4.5rem;
+  height: 80px;
   background-color: rgb(33, 37, 41);
 }
 
 #content-wrap {
-  padding-bottom: 2.5rem;
-  padding-top: 2.5rem;
+  padding-bottom: 80px;
+  padding-top: 2rem;
 }
 
 #page-container {
   position: relative;
-  min-height: 100vh;
+  min-height: 100%;
   background: rgb(45, 111, 92);
   background: linear-gradient(90deg, rgb(45, 111, 92) 0%, rgb(136, 108, 97) 25%, rgb(172, 172, 172) 50%, rgb(136, 108, 97) 75%, rgb(45, 111, 92) 100%);
 }
