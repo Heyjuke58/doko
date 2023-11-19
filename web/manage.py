@@ -1,5 +1,5 @@
 from doko_flask import app, db
-from doko_flask.models import User
+from doko_flask.models.user import User
 from flask.cli import FlaskGroup
 
 cli = FlaskGroup(app)

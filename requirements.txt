@@ -5,3 +5,4 @@ Django
 psycopg2-binary
 pytest
 flask
+sqlalchemy-utils

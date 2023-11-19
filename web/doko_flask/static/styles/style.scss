@@ -1,0 +1,251 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+@font-face {
+    font-family: "Poppins";
+    src: url("Poppins-Regular.woff2");
+}
+
+// $primary: #39b26f;
+
+//---Button color?
+
+// light brown
+// $primary: rgba(136, 108, 97, 1);
+// $primary_transparent: rgba(136, 108, 97, 0.5);
+// $primary_light: rgb(211, 183, 171);
+// $primary_light_only_code: d3b7ab; //needed for pasting in url
+
+// rust red
+$primary: rgba(117, 41, 36, 1);
+$primary_transparent: rgba(117, 41, 36, 0.5);
+$primary_light: rgb(201, 96, 89);
+$primary_light_only_code: c96059; //needed for pasting in url
+
+$secondary: rgba(45, 111, 92, 1);
+$secondary_transparent: rgba(45, 111, 92, 0.5);
+$secondary_light: rgb(105, 194, 169);
+
+$theme-colors: map-merge($theme-colors, ("primary": $primary));
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+$button_color: $primary;
+$button_color_transparent: #5c8f6540;
+$switch_knob_color: $primary_light;
+$main_color_1: rgb(33, 37, 41);
+$bs-btn-color: $button_color;
+
+$--bs-nav-link-hover-color: $secondary_light;
+
+body {
+    font-family: 'Poppins';
+    color: $secondary;
+}
+
+h2 {
+    color: $secondary;
+}
+
+h2.form-title {
+    border-bottom: 2px solid $secondary;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+
+.nav-link {
+    color: $secondary;
+    --bs-nav-link-padding-x: 0.7rem;
+}
+
+.nav-link:hover {
+    color: $secondary_light;
+}
+
+.nav-link:active {
+    color: $secondary;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: $secondary;
+}
+
+.fade-container {
+    transform: translateY(100%);
+    transition: transform ease-out 0.3s;
+}
+
+.fade-container.is-open {
+    transform: translateY(0);
+}
+
+.tab-site {
+    padding-top: 10px;
+    margin-bottom: 15px;
+}
+
+.margin div:first-child {
+    margin-right: auto;
+}
+
+.wrap {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 2px;
+    row-gap: 5px;
+}
+
+.wrap-center {
+    display: flex;
+    align-items: center;
+}
+
+.btn-create-table {
+    --bs-btn-padding-y: 0.15rem;
+    --bs-btn-padding-x: 0.5rem;
+}
+
+.non-game-body {
+    margin: auto;
+    padding: 10px;
+    border-style: solid solid solid solid;
+    border-width: 4px;
+    border-color: $secondary;
+    border-radius: 15px 15px 15px 15px;
+    max-width: 700px;
+    background-color: rgb(236, 236, 236);
+
+
+}
+
+.sign-up-body {
+    height: 450px;
+}
+
+.login-body {
+    height: 300px;
+}
+
+.lobby-body {
+    height: 590px;
+}
+
+.create-table-body {
+    height: 590px;
+}
+
+.form-control {
+    color: $secondary;
+}
+
+.form-control::placeholder {
+    color: $secondary_transparent;
+}
+
+.form-control:focus {
+    border-color: $secondary_transparent;
+    box-shadow: 0 0 0 0.25rem $secondary_transparent;
+    color: $secondary;
+}
+
+.form-label {
+    margin-bottom: 0.3rem;
+    margin-top: 0.35rem;
+}
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.create-form div:last-child {
+    margin-top: auto;
+
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.create-border-top {
+    border-top: 2px solid $secondary;
+    padding-top: 10px;
+}
+
+.tab {
+    width: auto;
+    margin-left: 20px;
+}
+
+.form-check-input {
+    clear: left;
+}
+
+.form-switch.form-switch-sm .form-check-input {
+    height: 1rem;
+    width: calc(1rem + 0.75rem);
+    border-radius: 2rem;
+}
+
+.form-switch.form-switch-md .form-check-input {
+    height: 1.5rem;
+    width: calc(2rem + 0.75rem);
+    border-radius: 3rem;
+}
+
+.form-switch.form-switch-lg .form-check-input {
+    height: 2rem;
+    width: calc(3rem + 0.75rem);
+    border-radius: 4rem;
+}
+
+.form-switch.form-switch-xl .form-check-input {
+    height: 2.5rem;
+    width: calc(4rem + 0.75rem);
+    border-radius: 5rem;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4.5rem;
+    background-color: $main_color_1;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;
+    padding-top: 2.5rem;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+    // background: rgb(172, 172, 172);
+    // background: radial-gradient(circle, rgba(172, 172, 172, 1) 0%, rgba(45, 111, 92, 1) 100%);
+    background: rgb(45, 111, 92);
+    background: linear-gradient(90deg, rgba(45, 111, 92, 1) 0%, rgba(136, 108, 97, 1) 25%, rgba(172, 172, 172, 1) 50%, rgba(136, 108, 97, 1) 75%, rgba(45, 111, 92, 1) 100%);
+}
+
+.form-check-input:checked {
+    background-color: $primary;
+    border-color: $primary;
+}
+
+.form-check-input:focus {
+    border-color: $primary_transparent;
+    box-shadow: 0 0 0 0.25rem $primary_transparent;
+}
+
+.form-switch .form-check-input:focus {
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23#{$primary_light_only_code}'/%3e%3c/svg%3e");
+}

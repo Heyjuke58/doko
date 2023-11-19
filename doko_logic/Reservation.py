@@ -5,10 +5,10 @@ from .GameModes import (
     ColorSoloDiamondsReplaced,
     ColorSoloDiamondsReplacedWithPiggies,
     ColorSoloPure,
+    Fleshless,
     GameModus,
     JacksSolo,
     KingsSolo,
-    Meatless,
     QueensJacksSolo,
     QueensSolo,
     SilentWedding,
@@ -21,7 +21,7 @@ from .Rules import Rules
 
 RESERVATION_VALUES = {0: "fine", 1: "wedding", 2: "poverty", 3: "solo", 4: "throw"}
 
-SOLO_VALUES = {0: SilentWedding, 1: TrumpSolo, 2: "ColorSolo", 3: QueensSolo, 4: JacksSolo, 5: KingsSolo, 6: QueensJacksSolo, 7: Meatless}
+SOLO_VALUES = {0: SilentWedding, 1: TrumpSolo, 2: "ColorSolo", 3: QueensSolo, 4: JacksSolo, 5: KingsSolo, 6: QueensJacksSolo, 7: Fleshless}
 
 
 @dataclass

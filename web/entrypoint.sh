@@ -11,6 +11,10 @@ then
     echo "PostgreSQL started"
 fi
 
+cd doko_flask/static
+npm install
+cd ../..
+
 # if [ "$FLASK_DEBUG" = "1" ]
 # then
 #     echo "Creating the database tables..."

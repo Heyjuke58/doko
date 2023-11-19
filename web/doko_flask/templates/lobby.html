@@ -2,5 +2,17 @@
 {% block title%}Doko{% endblock %}
 
 {% block content%}
-<h1 align="center">DOKO</h1>
+<div class="non-game-body lobby-body">
+    <div class="container align-center">
+        <a class="btn btn-primary" href="/create-table">Create Table</a>
+    </div>
+    <div class="container table-container">
+        {% for table in tables %}
+        <div>
+            <label>{{table.name}}</label>
+            <button type="button" class="btn btn-primary">Join</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

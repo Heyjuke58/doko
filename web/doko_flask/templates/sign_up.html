@@ -2,22 +2,26 @@
 {% block title%}Doko - Sign Up{% endblock %}
 
 {% block content%}
-<form method="POST">
-    <h2 align="center">Sign Up</h3>
-        <div class="form-group">
-            <label for="email">E-Mail address</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter e-mail">
-            <br />
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
-            <br />
-            <label for="password1">Password</label>
-            <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password">
-            <br />
-            <label for="password2">Repeat password</label>
-            <input type="password" class="form-control" id="password2" name="password2" placeholder="Repeat password">
+<div class="non-game-body sign-up-body">
+    <form method="POST" class="create-form">
+        <h2 align="center" class="form-title">Sign Up</h2>
+        <div class="container tab-site">
+            <div class="form-group">
+                <label class="form-label" for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                <label class="form-label" for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                <label class="form-label" for="password1">Password</label>
+                <input type="password" class="form-control" id="password1" name="password1"
+                    placeholder="Enter password">
+                <label class="form-label" for="password2">Repeat password</label>
+                <input type="password" class="form-control" id="password2" name="password2"
+                    placeholder="Repeat password">
+            </div>
         </div>
-        <br />
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-</form>
+        <div class="container align-right create-border-top">
+            <button type="submit" class="create-btn btn btn-primary">Sign Up</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

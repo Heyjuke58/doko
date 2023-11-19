@@ -8,10 +8,10 @@ from .GameModes import (
     TRUMP_SOLO_GAME_MODES,
     ColorSoloDiamondsReplaced,
     ColorSoloDiamondsReplacedWithPiggies,
+    Fleshless,
     GameModus,
     JacksSolo,
     KingsSolo,
-    Meatless,
     Piggies,
     Poverty,
     PovertyWithPiggies,
@@ -63,7 +63,7 @@ class Rules:
         jacks_solo: bool = True,
         queens_jacks_solo: bool = False,
         kings_solo: bool = True,
-        meatless_solo: bool = True,
+        fleshless_solo: bool = True,
         ## EXTRAPOINTS ##
         fox_caught: bool = True,
         fox_caught_in_solos: bool = True,  # Trump or Diamonds replaced
@@ -80,6 +80,7 @@ class Rules:
         poverty: bool = True,
         five_louses: bool = False,
         fox_highest_trump: bool = True,
+        seven_fulls: bool = False,
         wedding_1st_trick: bool = True,  # False: 1st non-trump trick
         ## COUNTING ##
         announcement_doubles: bool = False,  # False: 2 points
@@ -120,7 +121,7 @@ class Rules:
         self.jacks_solo = jacks_solo
         self.queens_jacks_solo = queens_jacks_solo
         self.kings_solo = kings_solo
-        self.meatless_solo = meatless_solo
+        self.fleshless_solo = fleshless_solo
 
         ## EXTRAPOINTS ##
         self.fox_caught = fox_caught
@@ -144,6 +145,7 @@ class Rules:
         self.poverty = poverty
         self.five_louses = five_louses
         self.fox_highest_trump = fox_highest_trump
+        self.seven_fulls = seven_fulls
         self.wedding_1st_trick = wedding_1st_trick
 
         ## COUNTING ##

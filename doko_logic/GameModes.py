@@ -204,9 +204,9 @@ class QueensJacksSolo(Solo):
         super().__init__("Queens and jacks solo", trumps)
 
 
-class Meatless(Solo):
+class Fleshless(Solo):
     def __init__(self) -> None:
-        super().__init__("Meatless", [])
+        super().__init__("Fleshless", [])
 
 
 NON_SOLO_GAME_MODES = [

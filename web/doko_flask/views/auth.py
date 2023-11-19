@@ -3,13 +3,13 @@ from flask_login import current_user, login_required, login_user, logout_user
 from sqlalchemy.exc import IntegrityError
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from . import db
-from .models import User
+from .. import db
+from ..models.user import User
 
-auth = Blueprint("auth", __name__)
+auth_views = Blueprint("auth_views", __name__)
 
 
-@auth.route("/login", methods=["GET", "POST"])
+@auth_views.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         email = str(request.form.get("email")).lower()
@@ -21,7 +21,7 @@ def login():
             if check_password_hash(user.password, password):
                 flash("Logged in successfully", category="success")
                 login_user(user, remember=True)
-                return redirect(url_for("views.lobby"))
+                return redirect(url_for("lobby_view.lobby"))
             else:
                 flash("Incorrect password, try again", category="error")
         else:
@@ -30,14 +30,14 @@ def login():
     return render_template("login.html", user=current_user)
 
 
-@auth.route("/logout")
+@auth_views.route("/logout")
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("auth.login"))
+    return redirect(url_for("auth_views.login"))
 
 
-@auth.route("/sign-up", methods=["GET", "POST"])
+@auth_views.route("/sign-up", methods=["GET", "POST"])
 def sign_up():
     if request.method == "POST":
         email = str(request.form.get("email")).lower()
@@ -58,15 +58,20 @@ def sign_up():
             flash("Password must be at least contain 5 characters.", category="error")
         else:
             try:
-                new_user = User(email, username, generate_password_hash(password1, method="sha256"))
+                new_user = User(
+                    email, username, generate_password_hash(password1, method="sha256")
+                )
                 db.session.add(new_user)
                 db.session.commit()
                 flash("Signed up successfully!", category="success")
                 login_user(new_user, remember=True)
-                return redirect(url_for("views.lobby"))
+                return redirect(url_for("lobby_view.lobby"))
 
             except IntegrityError as e:
-                flash(f"Could not sign you up. There is an integrity error {e}.", category="error")
+                flash(
+                    f"Could not sign you up. There is an integrity error {e}.",
+                    category="error",
+                )
             except Exception as e:
                 flash(f"There was an error: {e}", category="error")
 

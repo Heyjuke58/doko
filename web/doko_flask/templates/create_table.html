@@ -1,101 +1,575 @@
 {% extends "base.html" %}
-{% block title%}Doko - Create a table{% endblock %}
+{% block title%}Doko - Create Table{% endblock %}
 
 {% block content%}
-<form method="POST">
-    <h2 align="center">Create a table</h3>
-        <div class="form-group">
-            <div class="container">
-                <label for="table_name">Table name (optional)</label>
-                <input type="text" class="form-control" id="table_name" name="table_name"
-                    placeholder="Enter a name for the table (optional)">
-                <br />
-                <label for="password">Password (optional)</label>
-                <input type="password" class="form-control" id="password" name="password"
-                    placeholder="Enter a password for the table (optional)">
-                <br />
-            </div>
-            <div class="container">
-                <h3>Rules</h3>
+<div class="non-game-body create-table-body">
+    <form class="create-form" method="POST">
+        <h2 align="center" class="form-title"><b>Create Table</b></h2>
 
+        <ul class="nav nav-tabs" id="creatte-table-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="table-settings-tab" data-bs-toggle="tab"
+                    data-bs-target="#table-settings" type="button" role="tab" aria-controls="table-settings"
+                    aria-selected="true">Table Settings</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="general-rules-tab" data-bs-toggle="tab" data-bs-target="#general-rules"
+                    type="button" role="tab" aria-controls="general-rules" aria-selected="false">General
+                    Rules</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="solos-tab" data-bs-toggle="tab" data-bs-target="#solos" type="button"
+                    role="tab" aria-controls="solos" aria-selected="false">Solos</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="extrapoints-tab" data-bs-toggle="tab" data-bs-target="#extrapoints"
+                    type="button" role="tab" aria-controls="extrapoints" aria-selected="false">Extra Points</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="reservations-tab" data-bs-toggle="tab" data-bs-target="#reservations"
+                    type="button" role="tab" aria-controls="reservations" aria-selected="false">Reservations</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="bock-tab" data-bs-toggle="tab" data-bs-target="#bock" type="button"
+                    role="tab" aria-controls="bock" aria-selected="false">Bock</button>
+            </li>
+        </ul>
 
-                <div class="container">
-                    <h4>Nines</h4>
-                    <input type="checkbox" class="form-check-input" value="" id="nines" name="nines">
-                    <label for="nines">Play with nines</label>
+        <div class="tab-content" id="creatte-table-tab-content">
+            <div class="tab-pane fade show active" id="table-settings" role="tabpanel"
+                aria-labelledby="table-settings-tab">
+                <div class="container tab-site">
+                    <div class="form-group">
+                        <label class="form-label" for="table_name">Table name (optional)</label>
+                        <input type="text" class="form-control" name="table_name"
+                            placeholder="Enter table name (optional)">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="password">Password (optional)</label>
+                        <input type="password" class="form-control" name="password"
+                            placeholder="Enter table password (optional)">
+                    </div>
+                    <br />
                 </div>
+            </div>
 
-                <div class="container">
-                    <h4>Dulle</h4>
-                    <input type="checkbox" class="form-check-input" value="" id="dulle_1st_high" name="dulle_1st_high"
-                        checked>
-                    <label for="dulle_1st_high">First dulle is high (uncheck to make second dulle high)</label>
-                    <br>
-                    <div id="dulle_2nd_high_but_not_in_last_trick_container"
-                        name="dulle_2nd_high_but_not_in_last_trick_container" class="tab" hidden>
-                        <input type="checkbox" class="form-check-input" value=""
-                            id="dulle_2nd_high_but_not_in_last_trick" name="dulle_2nd_high_but_not_in_last_trick"
-                            disabled>
-                        <label class="form-check-label" for="dulle_2nd_high_but_not_in_last_trick">But not in the last
-                            trick.</label>
+            <div class="tab-pane fade" id="general-rules" role="tabpanel" aria-labelledby="general-rules-tab">
+                <div class="container tab-site">
+                    <div class="wrap margin form-group">
+                        <label class="wrap-center" for="nines">Nines</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="nines">
+                            <input type="hidden" value="0" name="nines">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="wrap-center">Dulle</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-primary btn-create-table" id="label_first_dulle">
+                                <input type="radio" class="btn-check" name="dulle" id="first_dulle" checked
+                                    value="first"> 1st
+                                beats
+                                2nd
+                            </label>
+                            <label class="btn btn-outline-primary btn-create-table" id="label_second_dulle">
+                                <input type="radio" class="btn-check" name="dulle" id="second_dulle" value="second"> 2nd
+                                beats 1st
+                            </label>
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="wrap-center">Reverse Dulle rule in last trick</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="reverse_dulle_rule">
+                            <input type="hidden" value="0" name="reverse_dulle_rule">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="wrap-center">Announcement Counting</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-primary btn-create-table" id="label_announcement_plus_2">
+                                <input type="radio" class="btn-check" value="plus_2" name="announcement_counting"
+                                    id="announcement_plus_2" checked> +2
+                            </label>
+                            <label class="btn btn-outline-primary btn-create-table" id="label_announcement_doubles">
+                                <input type="radio" class="btn-check" value="double" name="announcement_counting"
+                                    id="announcement_doubles"> x2
+                            </label>
+                        </div>
+                    </div>
+                    <div id="container_announcement" hidden>
+                        <div class="tab wrap margin">
+                            <label class="wrap-center">Also double Extra Points</label>
+                            <div class="form-check form-switch form-switch-md">
+                                <input type="checkbox" class="form-check-input" value="1" id="also_double_extra_points"
+                                    name="also_double_extra_points">
+                                <input type="hidden" value="0" name="also_double_extra_points">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <div class="wrap-center">
+                            <label class="wrap-center">Mandatory Announcement</label>
+                            <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                title="If the first trick has more than 30 points you must announce your win.">
+                                <i class="bi bi-question-circle" style="font-size: 1rem;margin-left: 5px;"></i>
+                            </span>
+                        </div>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="mandatory_announcement">
+                            <input type="hidden" value="0" name="mandatory_announcement">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="wrap-center">Piggies</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="piggies" id="piggies">
+                            <input type="hidden" value="0" name="piggies">
+                        </div>
+                    </div>
+                    <div id="container_piggies" hidden>
+                        <div class="tab wrap margin">
+                            <label class="wrap-center">Mandatory Announcement</label>
+                            <div class="form-check form-switch form-switch-md">
+                                <input type="checkbox" class="form-check-input" id="piggies_auto_announce"
+                                    name="piggies_auto_announce" value="1">
+                                <input type="hidden" value="0" name="piggies_auto_announce">
+                            </div>
+                        </div>
+                        <div class="tab wrap margin">
+                            <label class="wrap-center">Also in Poverty</label>
+                            <div class="form-check form-switch form-switch-md">
+                                <input type="checkbox" class="form-check-input" value="1" name="piggies_in_poverty"
+                                    id="piggies_in_poverty">
+                                <input type="hidden" value="0" name="piggies_in_poverty">
+                            </div>
+                        </div>
+                        <div class="tab wrap margin">
+                            <div class="wrap-center">
+                                <label class="wrap-center">Also in Trump
+                                    and Color Solo
+                                </label>
+                                <span data-bs-toggle="tooltip" data-bs-placement="right" title="Silent wedding can still have Piggies even if this option is not
+                                picked!">
+                                    <i class="bi bi-question-circle" style="font-size: 1rem;margin-left: 5px;"></i>
+                                </span>
+                            </div>
+                            <div class="form-check form-switch form-switch-md">
+                                <input type="checkbox" class="form-check-input" value="1"
+                                    id="piggies_in_trump_and_color_solo" name="piggies_in_trump_and_color_solo">
+                                <input type="hidden" value="0" name="piggies_in_trump_and_color_solo">
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="container">
-                    <h4>Piggies</h4>
-                    <input type="checkbox" class="form-check-input" value="" id="piggies" name="piggies" checked>
-                    <label for="piggies">Piggies</label>
-                    <br>
-                    <div id="piggies_auto_announce_container" name="piggies_auto_announce_container" class="tab">
-                        <input type="checkbox" class="form-check-input" value="" id="piggies_auto_announce"
-                            name="piggies_auto_announce">
-                        <label class="form-check-label" for="piggies_auto_announce">Auto announce when piggies are
-                            played.</label>
+            <div class="tab-pane fade" id="solos" role="tabpanel" aria-labelledby="solos-tab">
+                <div class="container tab-site">
+                    <div class="wrap margin">
+                        <label class="form-check-label wrap-center">Trump</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="trump_solo" id="trump_solo"
+                                checked>
+                            <input type="hidden" value="0" name="trump_solo">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="form-check-label wrap-center">Queens</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="queens_solo" checked>
+                            <input type="hidden" value="0" name="queens_solo">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="form-check-label wrap-center">Jacks</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="jacks_solo" checked>
+                            <input type="hidden" value="0" name="jacks_solo">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="form-check-label wrap-center">Fleshless</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="fleshless_solo" checked>
+                            <input type="hidden" value="0" name="fleshless_solo">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="form-check-label wrap-center">Queens & Jacks</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="queens_jacks_solo">
+                            <input type="hidden" value="0" name="queens_jacks_solo">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="form-check-label wrap-center">Kings</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="kings_solo">
+                            <input type="hidden" value="0" name="kings_solo">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="wrap-center">Color</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-primary btn-create-table" id="label_diamonds_replaced">
+                                <input type="radio" class="btn-check" value="diamonds_replaced" name="color_solo"
+                                    id="color_solo_diamonds_replaced" checked>Diamonds
+                                replaced
+                            </label>
+                            <label class="btn btn-outline-primary btn-create-table" id="label_pure">
+                                <input type="radio" class="btn-check" value="pure" name="color_solo"
+                                    id="color_solo_pure">Pure
+                            </label>
+                            <label class="btn btn-outline-primary btn-create-table" id="label_none">
+                                <input type="radio" class="btn-check" value="no" name="color_solo"
+                                    id="color_solo_none">No
+                            </label>
+                        </div>
                     </div>
                 </div>
-
-                <br />
             </div>
-            <br />
-            <button type="submit" class="btn btn-primary">Create table</button>
+
+            <div class="tab-pane fade" id="extrapoints" role="tabpanel" aria-labelledby="extrapoints-tab">
+                <div class="container tab-site">
+                    <div class="wrap margin">
+                        <label class="form-check-label wrap-center">Fox caught</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="fox_caught" id="fox_caught"
+                                checked>
+                            <input type="hidden" value="0" name="fox_caught">
+                        </div>
+                    </div>
+                    <div name="container_fox">
+                        <div class="tab wrap margin">
+                            <div class="wrap-center">
+                                <label class="wrap-center">Fox caught in Solos</label>
+                                <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                    title="Possible in these Solos: Trump, Color (Diamonds replaced) and Silent Wedding.">
+                                    <i class="bi bi-question-circle" style="font-size: 1rem;margin-left: 5px;"></i>
+                                </span>
+                            </div>
+                            <div class="form-check form-switch form-switch-md">
+                                <input type="checkbox" class="form-check-input" value="1" name="fox_caught_in_solos"
+                                    id="fox_caught_in_solos" checked>
+                                <input type="hidden" value="0" name="fox_caught_in_solos">
+                            </div>
+                        </div>
+                        <div class="tab wrap margin">
+                            <label class="wrap-center">Last Trick won with Fox</label>
+                            <div class="form-check form-switch form-switch-md">
+                                <input type="checkbox" class="form-check-input" value="1" name="fox_last_trick"
+                                    id="fox_last_trick">
+                                <input type="hidden" value="0" name="fox_last_trick">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="form-check-label wrap-center">Doppelkopf</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="doppelkopf" id="doppelkopf"
+                                checked>
+                            <input type="hidden" value="0" name="doppelkopf">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="form-check-label wrap-center">Karlchen</label>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="karlchen" id="karlchen"
+                                checked>
+                            <input type="hidden" value="0" name="karlchen">
+                        </div>
+                    </div>
+                    <div id="container_karlchen">
+                        <div class="tab wrap margin">
+                            <div class="wrap-center">
+                                <label class="wrap-center">Karlchen caught</label>
+                                <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                    title="Special: Karlchen can only be caught with queen of diamonds. 
+                                However, the partner of the karlchen player can save the karlchen with the queen of hearts if it was about to be
+                                caught (2 extra points). The last remaining person can deny the save of the karlchen with the queen of spades (3 extra points)">
+                                    <i class="bi bi-question-circle"
+                                        style="font-size: 1rem;margin-left: 5px;margin-right: 5px;"></i>
+                                </span>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-primary btn-create-table"
+                                    id="label_karlchen_caught_any_card">
+                                    <input type="radio" class="btn-check" value="any_card" name="karlchen_caught"
+                                        id="karlchen_caught_any_card">Any card
+                                </label>
+                                <label class="btn btn-outline-primary btn-create-table"
+                                    id="label_karlchen_caught_queen_of_diamonds">
+                                    <input type="radio" class="btn-check" value="queen_of_diamonds"
+                                        name="karlchen_caught" id="karlchen_caught_queen_of_diamonds">Queen of Diamonds
+                                </label>
+                                <label class="btn btn-outline-primary btn-create-table" id="label_karlchen_caught_plus">
+                                    <input type="radio" class="btn-check" value="special" name="karlchen_caught"
+                                        id="karlchen_caught_plus">Special
+                                </label>
+                                <label class="btn btn-primary btn-create-table" id="label_karlchen_caught_no">
+                                    <input type="radio" class="btn-check" value="no" name="karlchen_caught"
+                                        id="karlchen_caught_no" checked>No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="wrap-center">Dulle caught</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary btn-create-table" id="label_dulle_caught_any">
+                                <input type="radio" class="btn-check" value="any_card" name="dulle_caught"
+                                    id="dulle_caught_any">Any card
+                            </label>
+                            <label class="btn btn-outline-primary btn-create-table" id="label_dulle_caught_dulle">
+                                <input type="radio" class="btn-check" value="dulle" name="dulle_caught"
+                                    id="dulle_caught_dulle">Dulle
+                            </label>
+                            <label class="btn btn-primary btn-create-table" id="label_dulle_caught_no">
+                                <input type="radio" class="btn-check" value="no" name="dulle_caught"
+                                    id="dulle_caught_no" checked>No
+                            </label>
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <div class="wrap-center">
+                            <label class="wrap-center">Jacks Pile</label>
+                            <span data-bs-toggle="tooltip" data-bs-placement="right" title="4 Jacks in one Trick">
+                                <i class="bi bi-question-circle"
+                                    style="font-size: 1rem;margin-left: 5px;margin-right: 5px;"></i>
+                            </span>
+                        </div>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="jacks_pile" id="jacks_pile"
+                                checked>
+                            <input type="hidden" value="0" name="jacks_pile">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <div class="wrap-center">
+                            <label class="wrap-center">Hearts Trick</label>
+                            <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                title="All 4 non trump Heart cards in one trick. Not possible in a game with Nines.">
+                                <i class="bi bi-question-circle"
+                                    style="font-size: 1rem;margin-left: 5px;margin-right: 5px;"></i>
+                            </span>
+                        </div>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="hearts_trick"
+                                id="hearts_trick">
+                            <input type="hidden" value="0" name="hearts_trick">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="reservations" role="tabpanel" aria-labelledby="reservations-tab">
+                <div class="container tab-site">
+                    <div class="wrap margin">
+                        <div class="wrap-center">
+                            <label class="wrap-center">Poverty</label>
+                            <span data-bs-toggle="tooltip" data-bs-placement="right" title="Playable when the player has less or exactly 3 trump
+                            cards. If no one chooses to take the poverty the cards will be re-dealt.">
+                                <i class="bi bi-question-circle"
+                                    style="font-size: 1rem;margin-left: 5px;margin-right: 5px;"></i>
+                            </span>
+                        </div>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="poverty" id="poverty"
+                                checked>
+                            <input type="hidden" value="0" name="poverty">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <label class="wrap-center">Wedding Decision Trick</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-primary btn-create-table" id="label_any_trick">
+                                <input type="radio" class="btn-check" value="any_trick" name="wedding_decision_trick"
+                                    id="any_trick" checked>Any
+                            </label>
+                            <label class="btn btn-outline-primary btn-create-table" id="label_non_trump_trick">
+                                <input type="radio" class="btn-check" value="non_trump_trick"
+                                    name="wedding_decision_trick" id="non_trump_trick">1st non-Trump
+                            </label>
+                            <label class="btn btn-outline-primary btn-create-table" id="label_trump_trick">
+                                <input type="radio" class="btn-check" value="trump_trick" name="wedding_decision_trick"
+                                    id="trump_trick">1st
+                                Trump
+                            </label>
+                            <label class="btn btn-outline-primary btn-create-table" id="label_player_decides">
+                                <input type="radio" class="btn-check" value="player_decides"
+                                    name="wedding_decision_trick" id="player_decides">Player
+                                decides
+                            </label>
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <div class="wrap-center">
+                            <label class="wrap-center">Throws</label>
+                            <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                title="Announcing that the cards need to be re-dealt.">
+                                <i class="bi bi-question-circle"
+                                    style="font-size: 1rem;margin-left: 5px;margin-right: 5px;"></i>
+                            </span>
+                        </div>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="throws" id="throws" checked>
+                            <input type="hidden" value="0" name="throws">
+                        </div>
+                    </div>
+                    <div id="container_throws">
+                        <div class="tab wrap margin">
+                            <div class="wrap-center">
+                                <label class="wrap-center">Five Louses</label>
+                                <span data-bs-toggle="tooltip" data-bs-placement="right" title="Nines in a game with nines, kings
+                                otherwise.">
+                                    <i class="bi bi-question-circle" style="font-size: 1rem;margin-left: 5px;"></i>
+                                </span>
+                            </div>
+                            <div class="form-check form-switch form-switch-md">
+                                <input type="checkbox" class="form-check-input" value="1" name="five_louses"
+                                    id="five_louses" checked>
+                                <input type="hidden" value="0" name="five_louses">
+                            </div>
+                        </div>
+                        <div class="tab wrap margin">
+                            <div class="wrap-center">
+                                <label class="wrap-center">Fox highest Trump</label>
+                            </div>
+                            <div class="form-check form-switch form-switch-md">
+                                <input type="checkbox" class="form-check-input" value="1" name="fox_highest_trump"
+                                    id="fox_highest_trump">
+                                <input type="hidden" value="0" name="fox_highest_trump">
+                            </div>
+                        </div>
+                        <div class="tab wrap margin">
+                            <div class="wrap-center">
+                                <label class="wrap-center">Seven full cards</label>
+                                <span data-bs-toggle="tooltip" data-bs-placement="right" title="Full cards: cards that are worth 10 points or
+                                more">
+                                    <i class="bi bi-question-circle"
+                                        style="font-size: 1rem;margin-left: 5px;margin-right: 5px;"></i>
+                                </span>
+                            </div>
+                            <div class="form-check form-switch form-switch-md">
+                                <input type="checkbox" class="form-check-input" value="1" name="seven_fulls"
+                                    id="seven_fulls" checked>
+                                <input type="hidden" value="0" name="seven_fulls">
+                            </div>
+                        </div>
+                        <div class="tab wrap margin">
+                            <div class="wrap-center">
+                                <label class="wrap-center">Less than 3 Trumps</label>
+                                <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                    title="If this option and Poverty are both picked the player has the choice to eihter throw or play a Poverty with less than 3 Trumps.">
+                                    <i class="bi bi-question-circle"
+                                        style="font-size: 1rem;margin-left: 5px;margin-right: 5px;"></i>
+                                </span>
+                            </div>
+                            <div class="form-check form-switch form-switch-md">
+                                <input type="checkbox" class="form-check-input" value="1" name="less_than_3_trumps"
+                                    id="less_than_3_trumps">
+                                <input type="hidden" value="0" name="less_than_3_trumps">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="bock" role="tabpanel" aria-labelledby="bock-tab">
+                <div class="container tab-site">
+                    <div class="wrap margin">
+                        <label class="wrap-center">Bock round scheme</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-primary btn-create-table" id="label_overlap_bock">
+                                <input type="radio" class="btn-check" value="overlap" name="bock_scheme"
+                                    id="overlap_bock" checked>Overlap
+                            </label>
+                            <label class="btn btn-outline-primary btn-create-table" id="label_append_bock">
+                                <input type="radio" class="btn-check" value="append" name="bock_scheme"
+                                    id="append_bock">Append
+                            </label>
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <div class="wrap-center">
+                            <label class="wrap-center">Hearts Trick</label>
+                            <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                title="All 4 non trump Heart cards in one trick. Not possible in a game with Nines.">
+                                <i class="bi bi-question-circle"
+                                    style="font-size: 1rem;margin-left: 5px;margin-right: 5px;"></i>
+                            </span>
+                        </div>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="hearts_trick_bock"
+                                id="hearts_trick_bock" checked>
+                            <input type="hidden" value="0" name="hearts_trick_bock">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <div class="wrap-center">
+                            <label class="wrap-center">Split arse</label>
+                            <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                title="Both parties have 120 win points.">
+                                <i class="bi bi-question-circle"
+                                    style="font-size: 1rem;margin-left: 5px;margin-right: 5px;"></i>
+                            </span>
+                        </div>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="split_arse_bock"
+                                id="split_arse_bock" checked>
+                            <input type="hidden" value="0" name="split_arse_bock">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <div class="wrap-center">
+                            <label class="wrap-center">Lost Black</label>
+                        </div>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="lost_black_bock"
+                                id="lost_black_bock" checked>
+                            <input type="hidden" value="0" name="lost_black_bock">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <div class="wrap-center">
+                            <label class="wrap-center">Both announce</label>
+                            <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                title="Both parties Re and Contra announce their win.">
+                                <i class="bi bi-question-circle"
+                                    style="font-size: 1rem;margin-left: 5px;margin-right: 5px;"></i>
+                            </span>
+                        </div>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="both_announce_bock"
+                                id="both_announce_bock" checked>
+                            <input type="hidden" value="0" name="both_announce_bock">
+                        </div>
+                    </div>
+                    <div class="wrap margin">
+                        <div class="wrap-center">
+                            <label class="wrap-center">Jacks Pile</label>
+                            <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                title="Jacks pile only makes the currently played game count twice (not a whole Bock round).">
+                                <i class="bi bi-question-circle"
+                                    style="font-size: 1rem;margin-left: 5px;margin-right: 5px;"></i>
+                            </span>
+                        </div>
+                        <div class="form-check form-switch form-switch-md">
+                            <input type="checkbox" class="form-check-input" value="1" name="jacks_pile_bock"
+                                id="jacks_pile_bock" checked>
+                            <input type="hidden" value="0" name="jacks_pile_bock">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-</form>
+        <div class="container align-right create-border-top">
+            <button type="submit" class="create-btn btn btn-primary" style="color: white;"><b>Create Table</b></button>
+        </div>
+    </form>
+</div>
 {% endblock %}
 {% block scripts %}
-<style type="text/css">
-    .tab {
-        margin-left: 40px;
-    }
-</style>
-<script>
-    var checkbox_dulle = document.querySelector("input[name=dulle_1st_high]");
-    var checkbox_dulle_last_trick = document.querySelector("input[name=dulle_2nd_high_but_not_in_last_trick]");
-    var dulle_last_trick_container = document.querySelector("div[name=dulle_2nd_high_but_not_in_last_trick_container]");
-
-    checkbox_dulle.addEventListener('change', function () {
-        if (this.checked) {
-            checkbox_dulle_last_trick.checked = false;
-            checkbox_dulle_last_trick.disabled = true;
-            dulle_last_trick_container.setAttribute("hidden", "hidden");
-        } else {
-            checkbox_dulle_last_trick.disabled = false
-            dulle_last_trick_container.removeAttribute("hidden");
-        }
-    });
-
-    var checkbox_piggies = document.querySelector("input[name=piggies]");
-    var checkbox_piggies_auto_announce = document.querySelector("input[name=piggies_auto_announce]");
-    var piggies_auto_announce_container = document.querySelector("div[name=piggies_auto_announce_container]");
-
-    checkbox_piggies.addEventListener('change', function () {
-        if (this.checked) {
-            checkbox_piggies_auto_announce.disabled = false;
-            piggies_auto_announce_container.removeAttribute("hidden");
-        } else {
-            checkbox_piggies_auto_announce.checked = false;
-            checkbox_piggies_auto_announce.disabled = true;
-            piggies_auto_announce_container.setAttribute("hidden", "hidden");
-        }
-    });
-</script>
+<script src="{{url_for('static', filename='scripts/create_table.js')}}"></script>
 {% endblock %}

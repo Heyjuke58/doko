@@ -9,3 +9,5 @@ notes.md
 
 .env.prod
 .env.prod.db
+
+web/doko_flask/static/node_modules

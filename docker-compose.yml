@@ -7,7 +7,7 @@ services:
     build: ./nginx-html
     volumes:
       - ./nginx-html:/usr/share/nginx/html
-      - static_volume:/home/app/web/doko_flask/static
+      - ./web/doko_flask/static:/usr/share/static
     ports:
       - 8080:80
     depends_on:
@@ -21,7 +21,6 @@ services:
     # command: python manage.py run -h 0.0.0.0
     volumes:
       - ./web/:/usr/src/app
-      - static_volume:/home/app/web/doko_flask/static
     ports:
       - 5000:5000
       - 5679:5679
@@ -60,5 +59,4 @@ services:
 
 volumes:
   postgres_data:
-  static_volume:
   pgadmin_data:
